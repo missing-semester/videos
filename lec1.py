@@ -10,7 +10,7 @@ audio_offset = -0.06
 overlay_params = {'crop_x': 1298, 'crop_y': 356, 'crop_width': 545}
 
 Playlist([
-  Clip(Fullscreen(wide), start='22:22', end='25:20'),
+  Clip(Fullscreen(wide), start='22:22', end='26:29'),
   Clip(Fullscreen(tracking), end='28:20'),
   Clip(Overlay(screen, wide, **overlay_params), end='1:08:10'),
   Clip(Fullscreen(tracking), end='1:10:38'),
