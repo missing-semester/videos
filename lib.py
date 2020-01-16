@@ -1,5 +1,5 @@
 import ffmpeg # type: ignore
-from typing import List, Optional
+from typing import List, Optional, Union
 from abc import ABC, abstractmethod
 
 class Stream(ABC):
@@ -34,21 +34,23 @@ class Overlay(Stream):
     overlay_w = 480
     overlay_h = overlay_w * 9 // 16
     scaled = crop.filter('scale', overlay_w, -1)
-    translucent = scaled.filter('format', 'rgba').filter('colorchannelmixer', aa=0.3)
     overlay_margin = 25
     overlay_x = 1920 - overlay_margin - overlay_w
-    overlay_y = 1080 - overlay_margin - overlay_h
-    overlay = ffmpeg.overlay(main, translucent, x=overlay_x, y=overlay_y)
+    overlay_y = overlay_margin
+    overlay = ffmpeg.overlay(main, scaled, x=overlay_x, y=overlay_y)
     return overlay
 
 class Clip:
-  def __init__(self, stream: Stream, end: float, start: Optional[float] = None):
+  def __init__(self, stream: Stream, end: Union[float, str], start: Optional[Union[float, str]] = None):
     self.stream = stream
-    self.start = start
-    self.end = end
+    self.start: Optional[float] = hms(start) if start is not None and isinstance(start, str) else start
+    self.end = hms(end) if isinstance(end, str) else end
 
 class Playlist:
   def __init__(self, clips: List[Clip], audio_filename: str, audio_offset: float):
+    # You can figure out audio_offset by using VLC's Track Synchronization
+    # tool. The sign should match, so you can copy the exactly value from the
+    # "Audio track synchronization" in VLC.
     if not clips:
       raise ValueError('no clips')
     if clips[0].start is None:
@@ -74,3 +76,11 @@ class Playlist:
     audio = ffmpeg.input(self.audio_filename, ss=start + self.audio_offset, t=audio_duration)
     combined = ffmpeg.concat(video, audio.audio, a=1, v=1)
     out = ffmpeg.output(combined, output_filename).run()
+
+def hms(timestamp: str) -> float:
+  parts = timestamp.split(':')
+  assert 1 <= len(parts) <= 3
+  s = float(parts[-1])
+  m = float(parts[-2]) if len(parts) >= 2 else 0
+  h = float(parts[-3]) if len(parts) >= 3 else 0
+  return 60*60*h + 60*m + s
