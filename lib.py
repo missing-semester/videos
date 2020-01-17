@@ -47,7 +47,7 @@ class Clip:
     self.end = hms(end) if isinstance(end, str) else end
 
 class Playlist:
-  def __init__(self, clips: List[Clip], audio_filename: str, audio_offset: float):
+  def __init__(self, clips: List[Clip], audio_filename: str, audio_volume: Union[float, str], audio_offset: float):
     # You can figure out audio_offset by using VLC's Track Synchronization
     # tool. The sign should match, so you can copy the exactly value from the
     # "Audio track synchronization" in VLC.
@@ -60,6 +60,7 @@ class Playlist:
         raise ValueError('intermediate clip has explicit start specified; gaps are not supported')
     self.clips = clips
     self.audio_filename = audio_filename
+    self.audio_volume = audio_volume
     self.audio_offset = audio_offset
 
   def render(self, output_filename: str):
@@ -73,8 +74,9 @@ class Playlist:
       current_time = end
     video = ffmpeg.concat(*streams)
     audio_duration = current_time - start
-    audio = ffmpeg.input(self.audio_filename, ss=start + self.audio_offset, t=audio_duration)
-    combined = ffmpeg.concat(video, audio.audio, a=1, v=1)
+    audio_stream = ffmpeg.input(self.audio_filename, ss=start + self.audio_offset, t=audio_duration)
+    audio = audio_stream.audio.filter('volume', self.audio_volume)
+    combined = ffmpeg.concat(video, audio, a=1, v=1)
     out = ffmpeg.output(combined, output_filename).run()
 
 def hms(timestamp: str) -> float:
