@@ -38,10 +38,10 @@ class Overlay(Stream):
     if self.opacity == 1:
       translucent = scaled
     else:
-      translucent = scaled.filter('format', 'rgba').filter('colorchannelmixer', aa=0.5)
+      translucent = scaled.filter('format', 'rgba').filter('colorchannelmixer', aa=self.opacity)
     overlay_margin = 25
     overlay_x = 1920 - overlay_margin - overlay_w
-    overlay_y = overlay_margin
+    overlay_y = (1080 - overlay_h) // 2
     overlay = ffmpeg.overlay(main, translucent, x=overlay_x, y=overlay_y)
     return overlay
 
