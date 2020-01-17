@@ -7,7 +7,7 @@ wide_f = 'MIT-Missing-Semester-lec-mit-0000-2020jan16-1359-Adhoc Section_4.mp4'
 
 wide = Fullscreen(wide_f)
 tracking = Fullscreen(tracking_f)
-screen = Overlay(screen_f, wide_f, crop_x=1176, crop_y=367, crop_width=744, opacity=0.5)
+screen = Overlay(screen_f, wide_f, crop_x=1176, crop_y=367, crop_width=744, opacity=0.85)
 
 audio_volume = 10.0
 audio_offset = -0.06
