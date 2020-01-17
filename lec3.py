@@ -15,10 +15,9 @@ audio_volume = 10.0
 audio_offset = -0.06
 
 Playlist([
-  Clip(wide, start='0:38', end='1:30'),
-  Clip(tracking, end='5:25'),
+  Clip(wide, start='0:38', end='5:25'), # tracking cam isn't locked in at start
   Clip(chalkboard, end='8:55'),
-  Clip(tracking, end='10:10'),
+  Clip(wide, end='10:10'), # tracking cam is a bit jumpy here
   Clip(screen, end='20:08'),
   Clip(tracking, end='21:00'),
   Clip(screen, end='48:00'),
