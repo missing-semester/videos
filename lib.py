@@ -17,12 +17,13 @@ class Fullscreen(Stream):
     return stream
 
 class Overlay(Stream):
-  def __init__(self, main_filename: str, inside_filename: str, crop_x: int, crop_y: int, crop_width: int):
+  def __init__(self, main_filename: str, inside_filename: str, crop_x: int, crop_y: int, crop_width: int, opacity: float = 1):
     self.main_filename = main_filename
     self.inside_filename = inside_filename
     self.crop_x = crop_x
     self.crop_y = crop_y
     self.crop_width = crop_width
+    self.opacity = opacity
 
   def to_stream(self, start_timestamp: float, end_timestamp: float):
     dur = end_timestamp - start_timestamp
@@ -34,10 +35,14 @@ class Overlay(Stream):
     overlay_w = 480
     overlay_h = overlay_w * 9 // 16
     scaled = crop.filter('scale', overlay_w, -1)
+    if self.opacity == 1:
+      translucent = scaled
+    else:
+      translucent = scaled.filter('format', 'rgba').filter('colorchannelmixer', aa=0.5)
     overlay_margin = 25
     overlay_x = 1920 - overlay_margin - overlay_w
     overlay_y = overlay_margin
-    overlay = ffmpeg.overlay(main, scaled, x=overlay_x, y=overlay_y)
+    overlay = ffmpeg.overlay(main, translucent, x=overlay_x, y=overlay_y)
     return overlay
 
 class Clip:
