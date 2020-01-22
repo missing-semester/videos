@@ -1,11 +1,11 @@
 from lib import *
 from typing import Dict, Any
 
-audio = 'MIT-Missing-Semester-lec-mit-0000-2020jan21-1400-Adhoc Section_1.mp4'
-tracking_f = 'MIT-Missing-Semester-lec-mit-0000-2020jan21-1400-Adhoc Section_1.mp4'
-screen_f = 'MIT-Missing-Semester-lec-mit-0000-2020jan21-1400-Adhoc Section_2.mp4'
-chalkboard_f = 'MIT-Missing-Semester-lec-mit-0000-2020jan21-1400-Adhoc Section_3.mp4'
-wide_f = 'MIT-Missing-Semester-lec-mit-0000-2020jan21-1400-Adhoc Section_4.mp4'
+audio = 'MIT-Missing-Semeste-lec-mit-0000-2020jan21-1400-Adhoc Section_1.mp4'
+tracking_f = 'MIT-Missing-Semeste-lec-mit-0000-2020jan21-1400-Adhoc Section_1.mp4'
+screen_f = 'MIT-Missing-Semeste-lec-mit-0000-2020jan21-1400-Adhoc Section_2.mp4'
+chalkboard_f = 'MIT-Missing-Semeste-lec-mit-0000-2020jan21-1400-Adhoc Section_3.mp4'
+wide_f = 'MIT-Missing-Semeste-lec-mit-0000-2020jan21-1400-Adhoc Section_4.mp4'
 
 overlay_params: Dict[str, Any] = {'crop_x': 1182, 'crop_y': 394, 'crop_width': 545, 'opacity': 0.85}
 
@@ -18,7 +18,7 @@ audio_volume = 10.0
 audio_offset = -0.06
 
 Playlist([
-  Clip(wide, start='4:42', end='6:16'), 
+  Clip(wide, start='4:42', end='6:16'),
   Clip(chalkboard, end='6:53'),
   Clip(tracking, end='7:25'),
   Clip(screen, end='18:00'),
