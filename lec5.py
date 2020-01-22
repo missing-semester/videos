@@ -7,7 +7,7 @@ screen_f = 'MIT-Missing-Semester-lec-mit-0000-2020jan21-1400-Adhoc Section_2.mp4
 chalkboard_f = 'MIT-Missing-Semester-lec-mit-0000-2020jan21-1400-Adhoc Section_3.mp4'
 wide_f = 'MIT-Missing-Semester-lec-mit-0000-2020jan21-1400-Adhoc Section_4.mp4'
 
-overlay_params: Dict[str, Any] = {'crop_x': 1455, 'crop_y': 547, 'crop_width': 545, 'opacity': 0.85}
+overlay_params: Dict[str, Any] = {'crop_x': 1182, 'crop_y': 394, 'crop_width': 545, 'opacity': 0.85}
 
 wide = Fullscreen(wide_f)
 tracking = Fullscreen(tracking_f)
