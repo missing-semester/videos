@@ -14,7 +14,7 @@ screen = Overlay(screen_f, wide_f, crop_x=1458, crop_y=394, crop_width=462, opac
 audio_volume = 10.0
 audio_offset = -0.06
 
-Playlist([
+Multitrack([
   Clip(wide, start='0:38', end='5:25'), # tracking cam isn't locked in at start
   Clip(chalkboard, end='8:55'),
   Clip(wide, end='10:10'), # tracking cam is a bit jumpy here

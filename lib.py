@@ -51,7 +51,7 @@ class Clip:
     self.start: Optional[float] = hms(start) if start is not None and isinstance(start, str) else start
     self.end = hms(end) if isinstance(end, str) else end
 
-class Playlist:
+class Multitrack:
   def __init__(self, clips: List[Clip], audio_filename: str, audio_volume: Union[float, str], audio_offset: float):
     # You can figure out audio_offset by using VLC's Track Synchronization
     # tool. The sign should match, so you can copy the exactly value from the
@@ -90,8 +90,8 @@ class Playlist:
   def render(self, output_filename: str) -> None:
     ffmpeg.output(self.to_stream(), output_filename).run()
 
-class Sequence:
-  def __init__(self, playlists: List[Playlist]):
+class Playlist:
+  def __init__(self, playlists: List[Multitrack]):
     self.playlists = playlists
 
   def to_stream(self):

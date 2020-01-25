@@ -17,7 +17,7 @@ screen = Overlay(screen_f, wide_f, **overlay_params)
 audio_volume = 10.0
 audio_offset = -0.06
 
-Playlist([
+Multitrack([
   Clip(wide, start='4:42', end='6:16'),
   Clip(chalkboard, end='6:53'),
   Clip(tracking, end='7:25'),

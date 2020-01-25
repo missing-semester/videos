@@ -11,7 +11,7 @@ audio_volume = 10.0
 audio_offset = -0.06
 overlay_params: Dict[str, Any] = {'crop_x': 1298, 'crop_y': 356, 'crop_width': 545, 'opacity': 0.85}
 
-Playlist([
+Multitrack([
   Clip(Fullscreen(wide), start='22:22', end='26:29'),
   Clip(Fullscreen(tracking), end='28:20'),
   Clip(Overlay(screen, wide, **overlay_params), end='1:08:10'),

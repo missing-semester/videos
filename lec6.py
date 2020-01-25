@@ -21,8 +21,8 @@ screen_2 = Overlay(screen_2_f, wide_2_f, crop_x=1256, crop_y=443, crop_width=431
 audio_volume = 10.0
 audio_offset = -0.06
 
-Sequence([
-  Playlist([
+Playlist([
+  Multitrack([
     Clip(wide_1, start='0:38', end='5:25'),
     Clip(screen_1, end='05:50'),
     Clip(wide_1, end='08:55'),
@@ -41,7 +41,7 @@ Sequence([
     Clip(screen_1, end='47:05'),
     Clip(wide_1, end='47:44'),
   ], audio_1, audio_volume, audio_offset),
-  Playlist([
+  Multitrack([
     Clip(screen_2, start='0:27', end='38:20')
   ], audio_2, audio_volume, audio_offset),
 ]).render('lec6.mp4')
