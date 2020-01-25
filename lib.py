@@ -68,7 +68,7 @@ class Playlist:
     self.audio_volume = audio_volume
     self.audio_offset = audio_offset
 
-  def render(self, output_filename: str):
+  def streams(self):
     start = self.clips[0].start
     assert start is not None
     current_time = start
@@ -81,8 +81,26 @@ class Playlist:
     audio_duration = current_time - start
     audio_stream = ffmpeg.input(self.audio_filename, ss=start + self.audio_offset, t=audio_duration)
     audio = audio_stream.audio.filter('volume', self.audio_volume)
-    combined = ffmpeg.concat(video, audio, a=1, v=1)
-    out = ffmpeg.output(combined, output_filename).run()
+    return video, audio
+
+  def to_stream(self):
+    video, audio = self.streams()
+    return ffmpeg.concat(video, audio, a=1, v=1)
+
+  def render(self, output_filename: str) -> None:
+    ffmpeg.output(self.to_stream(), output_filename).run()
+
+class Sequence:
+  def __init__(self, playlists: List[Playlist]):
+    self.playlists = playlists
+
+  def to_stream(self):
+    streams = [p.streams() for p in self.playlists]
+    flattened = [s for i in streams for s in i]
+    return ffmpeg.concat(*flattened, a=1, v=1)
+
+  def render(self, output_filename: str) -> None:
+    ffmpeg.output(self.to_stream(), output_filename).run()
 
 def hms(timestamp: str) -> float:
   parts = timestamp.split(':')
