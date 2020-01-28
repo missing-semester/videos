@@ -52,10 +52,11 @@ class Clip:
     self.end = hms(end) if isinstance(end, str) else end
 
 class Multitrack:
-  def __init__(self, clips: List[Clip], audio_filename: str, audio_volume: Union[float, str], audio_offset: float):
-    # You can figure out audio_offset by using VLC's Track Synchronization
+  def __init__(self, clips: List[Clip], audio_filename: str, audio_volume: Union[float, str], audio_delay: float):
+    # You can figure out audio_delay by using VLC's Track Synchronization
     # tool. The sign should match, so you can copy the exactly value from the
-    # "Audio track synchronization" in VLC.
+    # "Audio track synchronization" in VLC. This value is how much the audio
+    # should be delayed with respect to the video.
     if not clips:
       raise ValueError('no clips')
     if clips[0].start is None:
@@ -66,7 +67,7 @@ class Multitrack:
     self.clips = clips
     self.audio_filename = audio_filename
     self.audio_volume = audio_volume
-    self.audio_offset = audio_offset
+    self.audio_delay = audio_delay
 
   def streams(self):
     start = self.clips[0].start
@@ -79,7 +80,7 @@ class Multitrack:
       current_time = end
     video = ffmpeg.concat(*streams)
     audio_duration = current_time - start
-    audio_stream = ffmpeg.input(self.audio_filename, ss=start + self.audio_offset, t=audio_duration)
+    audio_stream = ffmpeg.input(self.audio_filename, ss=start - self.audio_delay, t=audio_duration)
     audio = audio_stream.audio.filter('volume', self.audio_volume)
     return video, audio
 
