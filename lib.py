@@ -57,6 +57,25 @@ class Overlay(Stream):
     overlay = ffmpeg.overlay(main, translucent, x=overlay_x, y=overlay_y)
     return overlay
 
+class Tile(Stream):
+  def __init__(self, video_1: Stream, video_2: Stream, video_3: Stream, video_4: Stream):
+    self.video_1 = video_1
+    self.video_2 = video_2
+    self.video_3 = video_3
+    self.video_4 = video_4
+
+  def to_stream(self, start_timestamp, end_timestamp):
+    dummy = self.video_1.to_stream(start_timestamp, end_timestamp)
+    video_1 = self.video_1.to_stream(start_timestamp, end_timestamp)
+    video_2 = self.video_2.to_stream(start_timestamp, end_timestamp)
+    video_3 = self.video_3.to_stream(start_timestamp, end_timestamp)
+    video_4 = self.video_4.to_stream(start_timestamp, end_timestamp)
+    overlay = ffmpeg.overlay(dummy, video_1.filter('scale', 960, -1), x=0, y=0)
+    overlay = ffmpeg.overlay(overlay, video_2.filter('scale', 960, -1), x=960, y=0)
+    overlay = ffmpeg.overlay(overlay, video_3.filter('scale', 960, -1), x=0, y=540)
+    overlay = ffmpeg.overlay(overlay, video_4.filter('scale', 960, -1), x=960, y=540)
+    return overlay
+
 class Clip:
   def __init__(self, stream: Stream, end: Optional[Union[float, str]] = None, start: Optional[Union[float, str]] = None):
     self.stream = stream
