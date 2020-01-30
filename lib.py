@@ -40,7 +40,7 @@ class Overlay(Stream):
 
   def to_stream(self, start_timestamp: float, end_timestamp: float):
     main = self.main.to_stream(start_timestamp, end_timestamp)
-    inside = self.main.to_stream(start_timestamp, end_timestamp)
+    inside = self.inside.to_stream(start_timestamp, end_timestamp)
     crop_height = self.crop_width * 9 // 16
     crop = inside.crop(x=self.crop_x, y=self.crop_y, width=self.crop_width, height=crop_height)
 
