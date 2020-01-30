@@ -2,33 +2,45 @@ import ffmpeg # type: ignore
 from typing import List, Optional, Union
 from abc import ABC, abstractmethod
 
+class Audio:
+  def __init__(self, filename: str, delay: float = 0, volume: Union[float, str] = 1):
+    self.filename = filename
+    self.delay = delay
+    self.volume = volume
+
+  def to_stream(self, start_timestamp: float, end_timestamp: float):
+    dur = end_timestamp - start_timestamp
+    stream = ffmpeg.input(self.filename, ss=start_timestamp-self.delay, t=dur)
+    audio = stream.audio.filter('volume', self.volume)
+    return audio
+
 class Stream(ABC):
   @abstractmethod
   def to_stream(self, start_timestamp: float, end_timestamp: float):
     raise NotImplementedError
 
 class Fullscreen(Stream):
-  def __init__(self, filename: str):
+  def __init__(self, filename: str, delay: float = 0):
     self.filename = filename
+    self.delay = delay
 
   def to_stream(self, start_timestamp: float, end_timestamp: float):
     dur = end_timestamp - start_timestamp
-    stream = ffmpeg.input(self.filename, ss=start_timestamp, t=dur)
+    stream = ffmpeg.input(self.filename, ss=start_timestamp-self.delay, t=dur)
     return stream
 
 class Overlay(Stream):
-  def __init__(self, main_filename: str, inside_filename: str, crop_x: int, crop_y: int, crop_width: int, opacity: float = 1):
-    self.main_filename = main_filename
-    self.inside_filename = inside_filename
+  def __init__(self, main: Stream, inside: Stream, crop_x: int, crop_y: int, crop_width: int, opacity: float = 1):
+    self.main = main
+    self.inside = inside
     self.crop_x = crop_x
     self.crop_y = crop_y
     self.crop_width = crop_width
     self.opacity = opacity
 
   def to_stream(self, start_timestamp: float, end_timestamp: float):
-    dur = end_timestamp - start_timestamp
-    main = ffmpeg.input(self.main_filename, ss=start_timestamp, t=dur)
-    inside = ffmpeg.input(self.inside_filename, ss=start_timestamp, t=dur)
+    main = self.main.to_stream(start_timestamp, end_timestamp)
+    inside = self.main.to_stream(start_timestamp, end_timestamp)
     crop_height = self.crop_width * 9 // 16
     crop = inside.crop(x=self.crop_x, y=self.crop_y, width=self.crop_width, height=crop_height)
 
@@ -53,7 +65,7 @@ class Clip:
     self.end: Optional[float] = hms_(end)
 
 class Multitrack:
-  def __init__(self, clips: List[Clip], audio_filename: str, audio_volume: Union[float, str], audio_delay: float):
+  def __init__(self, clips: List[Clip], audio: Audio):
     # You can figure out audio_delay by using VLC's Track Synchronization
     # tool. The sign should match, so you can copy the exactly value from the
     # "Audio track synchronization" in VLC. This value is how much the audio
@@ -61,9 +73,7 @@ class Multitrack:
     if not clips:
       raise ValueError('no clips')
     self.clips = clips
-    self.audio_filename = audio_filename
-    self.audio_volume = audio_volume
-    self.audio_delay = audio_delay
+    self.audio = audio
 
   def streams(self):
     start = self.clips[0].start
@@ -83,9 +93,7 @@ class Multitrack:
       streams.append(clip.stream.to_stream(current_time, end))
       current_time = end
     video = ffmpeg.concat(*streams)
-    audio_duration = current_time - start
-    audio_stream = ffmpeg.input(self.audio_filename, ss=start - self.audio_delay, t=audio_duration)
-    audio = audio_stream.audio.filter('volume', self.audio_volume)
+    audio = self.audio.to_stream(start, current_time)
     return video, audio
 
   def to_stream(self):
