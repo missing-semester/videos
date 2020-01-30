@@ -46,10 +46,11 @@ class Overlay(Stream):
     return overlay
 
 class Clip:
-  def __init__(self, stream: Stream, end: Union[float, str], start: Optional[Union[float, str]] = None):
+  def __init__(self, stream: Stream, end: Optional[Union[float, str]] = None, start: Optional[Union[float, str]] = None):
     self.stream = stream
-    self.start: Optional[float] = hms(start) if start is not None and isinstance(start, str) else start
-    self.end = hms(end) if isinstance(end, str) else end
+    def hms_(ts: Optional[Union[float, str]]) -> Optional[float]: return hms(ts) if ts is not None and isinstance(ts, str) else ts
+    self.start: Optional[float] = hms_(start)
+    self.end: Optional[float] = hms_(end)
 
 class Multitrack:
   def __init__(self, clips: List[Clip], audio_filename: str, audio_volume: Union[float, str], audio_delay: float):
@@ -59,11 +60,6 @@ class Multitrack:
     # should be delayed with respect to the video.
     if not clips:
       raise ValueError('no clips')
-    if clips[0].start is None:
-      raise ValueError('first clip has no start')
-    for clip in clips[1:]:
-      if clip.start is not None:
-        raise ValueError('intermediate clip has explicit start specified; gaps are not supported')
     self.clips = clips
     self.audio_filename = audio_filename
     self.audio_volume = audio_volume
@@ -71,11 +67,19 @@ class Multitrack:
 
   def streams(self):
     start = self.clips[0].start
-    assert start is not None
+    if start is None:
+      raise ValueError('first clip has no start')
     current_time = start
     streams = []
-    for clip in self.clips:
-      end = clip.end
+    for i, clip in enumerate(self.clips):
+      if clip.start is not None and clip.start != current_time:
+        raise ValueError(f'time mismatch at index {i}')
+      if clip.end is not None:
+        end = clip.end
+      elif i+1 < len(self.clips) and self.clips[i+1].start is not None:
+        end = self.clips[i+1].start
+      else:
+        raise ValueError(f'cannot determine end time for clip at index {i}')
       streams.append(clip.stream.to_stream(current_time, end))
       current_time = end
     video = ffmpeg.concat(*streams)
