@@ -12,7 +12,7 @@ def main():
   parser.add_argument('--out', type=str, required=True)
   args = parser.parse_args()
   if args.audio is None:
-    args.audio = args.video_1
+    args.audio = args.video
 
   video = Fullscreen(args.video, delay=args.delay_video)
   audio = Audio(args.audio, delay=args.delay_audio)
