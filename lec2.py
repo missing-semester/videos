@@ -1,5 +1,4 @@
 from lib import *
-from typing import Dict, Any
 
 audio = Audio('MIT-Missing-Semester-lec-mit-0000-2020jan14-1400-Adhoc Section_1.mp4', delay=6/30)
 screen_only = Fullscreen('MIT-Missing-Semester-lec-mit-0000-2020jan14-1400-Adhoc Section_2.mp4', delay=6/30)

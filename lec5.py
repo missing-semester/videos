@@ -1,5 +1,4 @@
 from lib import *
-from typing import Dict, Any
 
 audio = Audio('MIT-Missing-Semeste-lec-mit-0000-2020jan21-1400-Adhoc Section_1.mp4', delay=6/30)
 tracking = Fullscreen('MIT-Missing-Semeste-lec-mit-0000-2020jan21-1400-Adhoc Section_1.mp4', delay=-1/30)
