@@ -77,7 +77,7 @@ class Tile(Stream):
     return overlay
 
 class Clip:
-  def __init__(self, stream: Stream, end: Optional[Union[float, str]] = None, start: Optional[Union[float, str]] = None):
+  def __init__(self, stream: Stream, *, end: Optional[Union[float, str]] = None, start: Optional[Union[float, str]] = None):
     self.stream = stream
     def hms_(ts: Optional[Union[float, str]]) -> Optional[float]: return hms(ts) if ts is not None and isinstance(ts, str) else ts
     self.start: Optional[float] = hms_(start)
@@ -109,6 +109,8 @@ class Multitrack:
         end = self.clips[i+1].start
       else:
         raise ValueError(f'cannot determine end time for clip at index {i}')
+      if current_time > end:
+        raise ValueError(f'time travel at index {i}')
       streams.append(clip.stream.to_stream(current_time, end))
       current_time = end
     video = ffmpeg.concat(*streams)
