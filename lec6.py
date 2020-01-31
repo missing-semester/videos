@@ -1,15 +1,15 @@
 from lib import *
 
 part_1 = 'MIT-Missing-Semester-lec-mit-0000-2020jan22-1406-Adhoc Section_{}.mp4'
-audio_1 = Audio(part_1.format(1), volume=10.0, delay=3/30)
+audio_1 = Audio(part_1.format(1), delay=5/30)
 screen_only_1 = Fullscreen(part_1.format(2), delay=5/30)
-chalkboard_1 = Fullscreen(part_1.format(3))
+chalkboard_1 = Fullscreen(part_1.format(3), delay=-1/30)
 wide_1 = Fullscreen(part_1.format(4))
 screen_1 = Overlay(screen_only_1, wide_1, crop_x=1243, crop_y=424, crop_width=470, opacity=0.85)
 
 part_2 = 'MIT-Missing-Semester-lec-mit-0000-2020jan23-1313-Adhoc Section_{}.mp4'
-audio_2 = Audio(part_2.format(1), volume=10.0, delay=7/30)
-screen_only_2 = Fullscreen(part_2.format(2), delay=6/30)
+audio_2 = Audio(part_2.format(1), delay=5/30)
+screen_only_2 = Fullscreen(part_2.format(2), delay=5/30)
 wide_2 = Fullscreen(part_2.format(4))
 screen_2 = Overlay(screen_only_2, wide_2, crop_x=1256, crop_y=443, crop_width=431, opacity=0.85)
 
