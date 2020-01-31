@@ -3,15 +3,15 @@ from typing import List, Optional, Union
 from abc import ABC, abstractmethod
 
 class Audio:
-  def __init__(self, filename: str, delay: float = 0, volume: Union[float, str] = 1):
+  def __init__(self, filename: str, delay: float = 0, loudness: float = -12.0):
     self.filename = filename
     self.delay = delay
-    self.volume = volume
+    self.loudness = loudness
 
   def to_stream(self, start_timestamp: float, end_timestamp: float):
     dur = end_timestamp - start_timestamp
     stream = ffmpeg.input(self.filename, ss=start_timestamp-self.delay, t=dur)
-    audio = stream.audio.filter('volume', self.volume)
+    audio = stream.audio.filter('loudnorm', i=self.loudness)
     return audio
 
 class Stream(ABC):
