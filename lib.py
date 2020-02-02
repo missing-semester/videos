@@ -1,6 +1,7 @@
 import ffmpeg # type: ignore
 from typing import List, Optional, Union
 from abc import ABC, abstractmethod
+from enum import Enum, auto
 
 class Audio:
   def __init__(self, filename: str, delay: float = 0, loudness: float = -12.0):
@@ -29,31 +30,51 @@ class Fullscreen(Stream):
     stream = ffmpeg.input(self.filename, ss=start_timestamp-self.delay, t=dur)
     return stream
 
+class Location(Enum):
+  MIDDLE_RIGHT = auto()
+  TOP_CENTER = auto()
+  TOP_RIGHT = auto()
+
 class Overlay(Stream):
-  def __init__(self, main: Stream, inside: Stream, crop_x: int, crop_y: int, crop_width: int, opacity: float = 1):
+  def __init__(self, main: Stream, inside: Stream, *, crop_x: int, crop_y: int, crop_width: int, crop_height: Optional[int] = None, opacity: float = 1, margin: int = 25, width: int = 480, location: Location = Location.MIDDLE_RIGHT):
     self.main = main
     self.inside = inside
     self.crop_x = crop_x
     self.crop_y = crop_y
     self.crop_width = crop_width
+    self.crop_height = crop_height
     self.opacity = opacity
+    self.margin = margin
+    self.width = width
+    self.location = location
 
   def to_stream(self, start_timestamp: float, end_timestamp: float):
     main = self.main.to_stream(start_timestamp, end_timestamp)
     inside = self.inside.to_stream(start_timestamp, end_timestamp)
-    crop_height = self.crop_width * 9 // 16
+    crop_height = self.crop_height
+    if crop_height is None:
+      crop_height = self.crop_width * 9 // 16
     crop = inside.crop(x=self.crop_x, y=self.crop_y, width=self.crop_width, height=crop_height)
 
-    overlay_w = 480
-    overlay_h = overlay_w * 9 // 16
+    overlay_w = self.width
+    overlay_h = crop_height * self.width // self.crop_width
     scaled = crop.filter('scale', overlay_w, -1)
     if self.opacity == 1:
       translucent = scaled
     else:
       translucent = scaled.filter('format', 'rgba').filter('colorchannelmixer', aa=self.opacity)
-    overlay_margin = 25
-    overlay_x = 1920 - overlay_margin - overlay_w
-    overlay_y = (1080 - overlay_h) // 2
+    overlay_margin = self.margin
+    if self.location == Location.MIDDLE_RIGHT:
+      overlay_x = 1920 - overlay_margin - overlay_w
+      overlay_y = (1080 - overlay_h) // 2
+    elif self.location == Location.TOP_CENTER:
+      overlay_x = 1920//2 - overlay_w//2
+      overlay_y = overlay_margin
+    elif self.location == Location.TOP_RIGHT:
+      overlay_x = 1920 - overlay_margin - overlay_w
+      overlay_y = overlay_margin
+    else:
+      raise ValueError(f'bad location: {self.location}')
     overlay = ffmpeg.overlay(main, translucent, x=overlay_x, y=overlay_y)
     return overlay
 
