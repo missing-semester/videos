@@ -23,3 +23,8 @@ To type-check the code, run:
 ```bash
 mypy .
 ```
+
+## License
+
+Copyright (c) 2020 Anish Athalye, Jose Javier, and Jon Gjengset. Released under
+the MIT License. See [LICENSE.md][license] for details.
