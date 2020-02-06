@@ -27,4 +27,4 @@ mypy .
 ## License
 
 Copyright (c) 2020 Anish Athalye, Jose Javier, and Jon Gjengset. Released under
-the MIT License. See [LICENSE.md][license] for details.
+the MIT License. See [LICENSE.md](LICENSE.md) for details.
