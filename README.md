@@ -15,9 +15,6 @@ Run `python lec{n}.py` to produce a lecture video. The DSL defined in `lib.py`
 is pretty simple; look at any of the processing scripts for any lecture video,
 and it should be clear how to make new ones.
 
-Right now, the DSL requires that all video streams are already synced with each
-other, which is e.g. the case with the MIT ODL lecture capture systems.
-
 To type-check the code, run:
 
 ```bash
