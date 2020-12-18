@@ -1,3 +1,0 @@
-language: python
-install: pip install mypy
-script: mypy .

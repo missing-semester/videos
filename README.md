@@ -1,4 +1,4 @@
-# Missing Semester: Lecture Videos [[![Build Status](https://travis-ci.com/missing-semester/videos.svg?branch=master)](https://travis-ci.com/missing-semester/videos)]
+# Missing Semester: Lecture Videos [![Build Status](https://github.com/missing-semester/videos/workflows/CI/badge.svg)](https://github.com/missing-semester/videos/actions?query=workflow%3ACI)
 
 This repository contains scripts for producing lecture videos for [Missing
 Semester](https://missing.csail.mit.edu).
