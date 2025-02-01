@@ -1,4 +1,4 @@
-# Missing Semester: Lecture Videos [![Build Status](https://github.com/missing-semester/videos/workflows/CI/badge.svg)](https://github.com/missing-semester/videos/actions?query=workflow%3ACI)
+# Missing Semester: Lecture Videos [![Build Status](https://github.com/missing-semester/videos/actions/workflows/ci.yml/badge.svg)](https://github.com/missing-semester/videos/actions/workflows/ci.yml)
 
 This repository contains scripts for producing lecture videos for [Missing
 Semester](https://missing.csail.mit.edu).
