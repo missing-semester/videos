@@ -5,15 +5,30 @@ on:
   schedule:
     - cron: '0 8 * * 6'
 jobs:
-  build:
+  typecheck:
     runs-on: ubuntu-latest
-    name: Python ${{ matrix.python }}
+    name: Type check
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
         with:
-          python-version: 3.8
-      - run: |
-          python -m pip install --upgrade pip
-          pip install mypy
-      - run: mypy .
+          python-version: "3.13"
+      - run: uv run mypy .
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.13"
+      - run: uv run ruff check
+  fmt:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.13"
+      - run: uv run ruff format --check

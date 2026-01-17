@@ -1,0 +1,37 @@
+[project]
+name = "videos"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ffmpeg-python>=0.2.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19.1",
+    "ruff>=0.14.13",
+]
+
+[tool.ruff]
+line-length = 120
+lint.select = [
+    # pycodestyle
+    "E",
+    "W",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # ruff-specific rules
+    "RUF",
+]
+
+[tool.mypy]
+strict = true

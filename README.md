@@ -5,23 +5,35 @@ Semester](https://missing.csail.mit.edu).
 
 ## Dependencies
 
-```bash
-pip install ffmpeg-python
-```
+These scripts rely on [uv](https://docs.astral.sh/uv/).
 
 ## Usage
 
-Run `python lec{n}.py` to produce a lecture video. The DSL defined in `lib.py`
-is pretty simple; look at any of the processing scripts for any lecture video,
-and it should be clear how to make new ones.
+Run `uv run python {term}_lec{n}.py` to produce a lecture video. The DSL
+defined in `lib.py` is pretty simple; look at any of the processing scripts for
+any lecture video, and it should be clear how to make new ones.
+
+## Development
 
 To type-check the code, run:
 
 ```bash
-mypy .
+uv run mypy .
+```
+
+To run the linter, run:
+
+```bash
+uv run ruff check --fix
+```
+
+To run the formatter, run:
+
+```bash
+uv run ruff format
 ```
 
 ## License
 
-Copyright (c) 2020 Anish Athalye, Jose Javier, and Jon Gjengset. Released under
-the MIT License. See [LICENSE.md](LICENSE.md) for details.
+Copyright (c) Anish Athalye, Jose Javier, and Jon Gjengset. Released under the
+MIT License. See [LICENSE.md](LICENSE.md) for details.
