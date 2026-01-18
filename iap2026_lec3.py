@@ -43,3 +43,23 @@ Multitrack(
     ],
     audio,
 ).render("lec3.mp4", title="Missing Semester IAP 2026: Lecture 3")
+
+"""
+Title: Lecture 3: Development Environment and Tools
+
+Description:
+
+You can find the lecture notes and exercises for this lecture at https://missing.csail.mit.edu/2026/development-environment/
+
+0:00 - Introduction
+3:51 - Text editing and Vim
+8:05 - Modal editing
+12:42 - Basics: inserting text
+13:28 - Vim's interface is a programming language
+24:13 - Putting it all together
+28:56 - Code intelligence and language servers
+33:54 - AI-powered development
+35:25 - Autocomplete
+42:25 - Inline chat
+45:32 - Student questions
+"""
