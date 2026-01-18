@@ -180,10 +180,7 @@ class Multitrack:
         return ffmpeg.concat(video, audio, a=1, v=1)
 
     def render(self, output_filename: str, title: str | None = None) -> None:
-        kwargs = {
-            "vcodec": "libx265",
-            "tag:v": "hvc1",
-        }
+        kwargs = {}
         if title:
             kwargs["metadata"] = f"title={title}"
         ffmpeg.output(self.to_stream(), output_filename, **kwargs).run()
@@ -199,10 +196,7 @@ class Playlist:
         return ffmpeg.concat(*flattened, a=1, v=1)
 
     def render(self, output_filename: str, title: str | None = None) -> None:
-        kwargs = {
-            "vcodec": "libx265",
-            "tag:v": "hvc1",
-        }
+        kwargs = {}
         if title:
             kwargs["metadata"] = f"title={title}"
         ffmpeg.output(self.to_stream(), output_filename, **kwargs).run()
