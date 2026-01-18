@@ -22,7 +22,6 @@ Multitrack(
         Clip(wide, start="06:23"),
         Clip(screen_wide, start="06:30"),
         Clip(wide, start="06:43"),
-        Clip(tracking, start="12:32"),
         Clip(screen_lectern, start="20:28"),
         Clip(wide, start="1:20:30", end="1:21:06"),
     ],

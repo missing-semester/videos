@@ -18,11 +18,11 @@ screen_lectern = Overlay(screen_only, wide, crop_x=1192, crop_y=459, crop_width=
 
 Multitrack(
     [
-        Clip(tracking, start="05:34"),
+        Clip(wide, start="05:34"),
         Clip(screen_lectern, start="06:20"),
-        Clip(tracking, start="07:16"),
+        Clip(wide, start="07:16"),
         Clip(screen_lectern, start="08:21"),
-        Clip(tracking, start="08:30"),
+        Clip(wide, start="08:30"),
         Clip(screen_lectern, start="12:16"),
         Clip(wide, start="13:30"),
         Clip(left_chalkboard, start="13:57"),
@@ -32,14 +32,15 @@ Multitrack(
         Clip(left_chalkboard, start="19:33"),
         Clip(wide, start="20:12"),
         Clip(screen_lectern, start="20:40"),
-        Clip(tracking, start="27:00"),
+        Clip(tracking, start="27:00"),  # camera is still this whole time
         Clip(screen_lectern, start="29:48"),
-        Clip(tracking, start="34:15"),
+        Clip(wide, start="34:15"),
+        Clip(left_chalkboard, start="35:22"),
+        Clip(wide, start="35:52"),
         Clip(screen_lectern, start="36:30"),
-        Clip(tracking, start="39:25"),
+        Clip(wide, start="39:25"),
         Clip(screen_lectern, start="41:20"),
-        Clip(wide, start="51:05"),
-        Clip(tracking, start="51:30", end="59:22"),
+        Clip(wide, start="51:05", end="59:22"),
     ],
     audio,
 ).render("lec3.mp4", title="Missing Semester IAP 2026: Lecture 3")

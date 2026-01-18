@@ -15,12 +15,13 @@ wide = Fullscreen("Missing-Semester-of-your-CS-Education-on-1_13_2026-(Tue)-Wide
 right_chalkboard = Fullscreen(
     "Missing-Semester-of-your-CS-Education-on-1_13_2026-(Tue)-RightChalk-2026jan13.mp4", delay=-41 / 60
 )
-screen_tracking = Overlay(screen_only, tracking, crop_y=200, crop_x=(1920 - 1000) // 2, crop_width=1000, opacity=0.85)
+
+screen_lectern = Overlay(screen_only, wide, crop_x=1192, crop_y=459, crop_width=473, opacity=0.85)
 
 Multitrack(
     [
-        Clip(tracking, start="06:17"),
-        Clip(screen_tracking, start="07:33"),
+        Clip(wide, start="06:17"),
+        Clip(screen_lectern, start="07:33"),
         Clip(tracking, start="1:12:17", end="1:12:36"),
     ],
     audio,
