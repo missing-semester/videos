@@ -35,13 +35,13 @@ Description:
 
 You can find the lecture notes and exercises for this lecture at https://missing.csail.mit.edu/2026/course-shell/
 
-0:00 - Introduction
-1:20 - Motivation
-3:50 - Class structure and logistics
-7:06 - What is the shell?
-11:59 - Why should you care about it?
-14:04 - Navigating in the shell
-28:02 - What is available in the shell?
-58:50 - The shell language (bash)
+0:00:00 - Introduction
+0:01:20 - Motivation
+0:03:50 - Class structure and logistics
+0:07:06 - What is the shell?
+0:11:59 - Why should you care about it?
+0:14:04 - Navigating in the shell
+0:28:02 - What is available in the shell?
+0:58:50 - The shell language (bash)
 1:14:05 - Conclusion
 """

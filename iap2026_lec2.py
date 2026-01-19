@@ -34,16 +34,16 @@ Description:
 
 You can find the lecture notes and exercises for this lecture at https://missing.csail.mit.edu/2026/command-line-environment/
 
-0:00 - Introduction
-1:17 - The Command Line Interface
-2:37 - Arguments
-10:26 - Streams
-16:19 - Environment variables
-21:08 - Return codes
-26:04 - Signals
-31:59 - Remote Machines
-37:30 - Terminal Multiplexers
-41:24 - Customizing the Shell
+0:00:00 - Introduction
+0:01:17 - The Command Line Interface
+0:02:37 - Arguments
+0:10:26 - Streams
+0:16:19 - Environment variables
+0:21:08 - Return codes
+0:26:04 - Signals
+0:31:59 - Remote Machines
+0:37:30 - Terminal Multiplexers
+0:41:24 - Customizing the Shell
 1:00:28 - AI in the Shell
 1:04:56 - Terminal Emulators
 """
