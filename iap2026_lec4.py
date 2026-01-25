@@ -23,3 +23,26 @@ Multitrack(
     ],
     audio,
 ).render("lec4.mp4", title="Missing Semester IAP 2026: Lecture 4")
+
+"""
+Title: Lecture 4: Debugging and Profiling
+
+Description:
+
+You can find the lecture notes and exercises for this lecture at https://missing.csail.mit.edu/2026/debugging-profiling/
+
+0:00:00 - Introduction
+0:00:11 - Debugging
+0:11:25 - Record-Replay Debugging
+0:24:36 - System Call Tracing
+0:35:15 - bpftrace and eBPF
+0:43:45 - Network Debugging
+0:46:49 - Sanitizers
+0:50:56 - Valgrind: When You Can't Recompile
+0:52:35 - AI for Debugging
+0:54:42 - Profiling
+0:55:05 - Timing
+0:58:33 - Resource Monitoring
+1:01:24 - Visualizing Performance Data
+1:12:40 - Conclusion
+"""
