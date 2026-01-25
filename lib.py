@@ -7,6 +7,7 @@ import ffmpeg  # type: ignore
 __all__ = [
     "Audio",
     "Clip",
+    "Crop",
     "Fullscreen",
     "Location",
     "Multitrack",
@@ -45,6 +46,28 @@ class Fullscreen(Stream):
         dur = end_timestamp - start_timestamp
         stream = ffmpeg.input(self.filename, ss=start_timestamp - self.delay, t=dur)
         return stream
+
+
+class Crop(Stream):
+    def __init__(
+        self,
+        stream: Stream,
+        *,
+        x: int,
+        y: int,
+        width: int,
+    ):
+        self.stream = stream
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = width * 9 // 16
+
+    def to_stream(self, start_timestamp: float, end_timestamp: float) -> Any:
+        stream = self.stream.to_stream(start_timestamp, end_timestamp)
+        cropped = stream.crop(x=self.x, y=self.y, width=self.width, height=self.height)
+        scaled = cropped.filter("scale", 1920, 1080).filter("setsar", 1)
+        return scaled
 
 
 class Location(Enum):
