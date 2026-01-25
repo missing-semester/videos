@@ -33,7 +33,7 @@ You can find the lecture notes and exercises for this lecture at https://missing
 
 0:00:00 - Introduction
 0:00:11 - Debugging
-0:11:25 - Record-Replay Debugging
+0:07:58 - Record-Replay Debugging
 0:24:36 - System Call Tracing
 0:35:15 - bpftrace and eBPF
 0:43:45 - Network Debugging
