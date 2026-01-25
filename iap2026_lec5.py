@@ -39,3 +39,26 @@ Multitrack(
     ],
     audio,
 ).render("lec5.mp4", title="Missing Semester IAP 2026: Lecture 5")
+
+"""
+Title: Lecture 5: Version Control and Git
+
+Description:
+
+You can find the lecture notes and exercises for this lecture at https://missing.csail.mit.edu/2026/version-control/
+
+0:00:00 - Introduction
+0:05:45 - Git's data model
+0:06:16 - Snapshots
+0:07:54 - Modeling history: relating snapshots
+0:12:00 - Data model, as pseudocode
+0:15:31 - Objects and content-addressing
+0:20:55 - References
+0:32:07 - Repositories
+0:34:45 - Staging area
+0:37:50 - Git command-line interface
+0:38:37 - Basics
+0:48:24 - Branching and merging
+1:00:23 - Remotes
+1:06:34 - Conclusion
+"""
