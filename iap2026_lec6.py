@@ -18,3 +18,21 @@ Multitrack(
     ],
     audio,
 ).render("lec6.mp4", title="Missing Semester IAP 2026: Lecture 6")
+
+"""
+Title: Lecture 6: Packaging and Shipping Code
+
+Description:
+
+You can find the lecture notes and exercises for this lecture at https://missing.csail.mit.edu/2026/shipping-code/
+
+0:00:00 - Introduction
+0:02:00 - Dependencies & Environments
+0:12:55 - Artifacts & Packaging
+0:21:27 - Releases & Versioning
+0:25:10 - Reproducibility
+0:30:53 - VMs & Containers
+0:45:37 - Services & Orchestration
+0:54:38 - Publishing
+1:00:20 - Conclusion
+"""
