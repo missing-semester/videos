@@ -5,7 +5,10 @@ from lib import Audio, Clip, Fullscreen, Multitrack, Overlay
 
 os.chdir(sys.argv[1])
 
-audio = Audio("Missing-Semester-of-your-CS-Education-on-1_20_2026-(Tue)-Tracking-2026jan20.mp4", delay=0.12)
+# noise reduction using Audacity,
+# noise source is lecture 6, approx 8:03.70 -- 8:04.85; this only has background static
+# noise reduction applied with settings: reduction 30 dB, sensitivity 6.00, frequency smoothing 2 bands
+audio = Audio("denoised.wav", delay=0.12)
 tracking = Fullscreen("Missing-Semester-of-your-CS-Education-on-1_20_2026-(Tue)-Tracking-2026jan20.mp4")
 screen_only = Fullscreen("Missing-Semester-of-your-CS-Education-on-1_20_2026-(Tue)-PC2-2026jan20.mp4", delay=-3 / 60)
 
