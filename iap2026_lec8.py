@@ -20,3 +20,18 @@ Multitrack(
     ],
     audio,
 ).render("lec8.mp4", title="Missing Semester IAP 2026: Lecture 8")
+
+"""
+Title: Lecture 8: Beyond the Code
+
+Description:
+
+You can find the lecture notes and exercises for this lecture at https://missing.csail.mit.edu/2026/beyond-code/
+
+0:00:00 - Introduction
+0:01:53 - One-way communication
+0:20:49 - Collaboration
+0:54:08 - Education
+0:58:41 - AI etiquette
+1:04:16 - Conclusion
+"""
