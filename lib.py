@@ -8,6 +8,7 @@ __all__ = [
     "Audio",
     "Clip",
     "Crop",
+    "Framerate",
     "Fullscreen",
     "Location",
     "Multitrack",
@@ -68,6 +69,16 @@ class Crop(Stream):
         cropped = stream.crop(x=self.x, y=self.y, width=self.width, height=self.height)
         scaled = cropped.filter("scale", 1920, 1080).filter("setsar", 1)
         return scaled
+
+
+class Framerate(Stream):
+    def __init__(self, stream: Stream, fps: float):
+        self.stream = stream
+        self.fps = fps
+
+    def to_stream(self, start_timestamp: float, end_timestamp: float) -> Any:
+        stream = self.stream.to_stream(start_timestamp, end_timestamp)
+        return stream.filter("fps", self.fps)
 
 
 class Location(Enum):
@@ -203,7 +214,7 @@ class Multitrack:
         return ffmpeg.concat(video, audio, a=1, v=1)
 
     def render(self, output_filename: str, title: str | None = None) -> None:
-        kwargs = {}
+        kwargs = {"fps_mode": "cfr"}
         if title:
             kwargs["metadata"] = f"title={title}"
         ffmpeg.output(self.to_stream(), output_filename, **kwargs).run()
@@ -219,7 +230,7 @@ class Playlist:
         return ffmpeg.concat(*flattened, a=1, v=1)
 
     def render(self, output_filename: str, title: str | None = None) -> None:
-        kwargs = {}
+        kwargs = {"fps_mode": "cfr"}
         if title:
             kwargs["metadata"] = f"title={title}"
         ffmpeg.output(self.to_stream(), output_filename, **kwargs).run()
