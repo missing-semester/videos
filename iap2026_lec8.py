@@ -9,7 +9,6 @@ os.chdir(sys.argv[1])
 # noise source is lecture 8, approx 24:46.75 -- 24:48.00; works better than using lecture 3's noise sample
 # noise reduction applied with settings: reduction 30 dB, sensitivity 6.00, frequency smoothing 2 bands
 audio = Audio("denoised.wav", delay=0.14)
-tracking = Fullscreen("Missing-Semester-of-your-CS-Education-on-1_22_2026-(Thu)-Tracking-2026jan22.mp4")
 wide = Fullscreen("Missing-Semester-of-your-CS-Education-on-1_22_2026-(Thu)-Wideshot-2026jan22.mp4", delay=30 / 60)
 
 wide_crop = Crop(wide, x=840, y=350, width=800)
