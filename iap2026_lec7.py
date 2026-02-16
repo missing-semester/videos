@@ -5,10 +5,7 @@ from lib import Audio, Clip, Crop, Fullscreen, Multitrack, Overlay
 
 os.chdir(sys.argv[1])
 
-# TODO replace with better audio
-audio = Audio(
-    "Missing-Semester-of-your-CS-Education-on-1_21_2026-(Wed)-Tracking-2026jan21.mp4", delay=0.09, loudnorm=False
-)
+audio = Audio("fiverr-denoised.wav", delay=0.09, loudnorm=False)
 wide = Fullscreen("Missing-Semester-of-your-CS-Education-on-1_21_2026-(Wed)-Wideshot-2026jan21.mp4", delay=-16 / 30)
 screen_only = Fullscreen("Missing-Semester-of-your-CS-Education-on-1_21_2026-(Wed)-PC2-2026jan21.mp4", delay=0)
 left_chalkboard = Fullscreen(
