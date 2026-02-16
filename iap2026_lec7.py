@@ -44,3 +44,18 @@ Multitrack(
     ],
     audio,
 ).render("lec7.mp4", title="Missing Semester IAP 2026: Lecture 7")
+
+"""
+Title: Lecture 7: Agentic Coding
+
+Description:
+
+You can find the lecture notes and exercises for this lecture at https://missing.csail.mit.edu/2026/agentic-coding/
+
+0:00:00 - Introduction
+0:11:37 - How AI models and agents work
+0:26:44 - Privacy
+0:27:55 - Use cases
+0:41:54 - Advanced agents
+0:58:40 - What to watch out for
+"""
