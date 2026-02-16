@@ -20,15 +20,18 @@ __all__ = [
 
 
 class Audio:
-    def __init__(self, filename: str, delay: float = 0, loudness: float = -12.0):
+    def __init__(self, filename: str, *, delay: float = 0, loudnorm: bool = True, loudness: float = -12.0):
         self.filename = filename
         self.delay = delay
+        self.loudnorm = loudnorm
         self.loudness = loudness
 
     def to_stream(self, start_timestamp: float, end_timestamp: float) -> Any:
         dur = end_timestamp - start_timestamp
         stream = ffmpeg.input(self.filename, ss=start_timestamp - self.delay, t=dur)
-        audio = stream.audio.filter("loudnorm", i=self.loudness)
+        audio = stream.audio
+        if self.loudnorm:
+            audio = audio.filter("loudnorm", i=self.loudness)
         return audio
 
 
@@ -39,7 +42,7 @@ class Stream(ABC):
 
 
 class Fullscreen(Stream):
-    def __init__(self, filename: str, delay: float = 0):
+    def __init__(self, filename: str, *, delay: float = 0):
         self.filename = filename
         self.delay = delay
 
