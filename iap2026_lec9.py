@@ -14,7 +14,7 @@ wide_crop = Crop(wide, x=1920 - 736, y=400, width=736)
 
 Multitrack(
     [
-        Clip(screen_lectern, start="06:18"),
+        Clip(screen_lectern, start="06:19.5"),
         Clip(wide_crop, start="1:12:30", end="1:21:33"),
     ],
     audio,
