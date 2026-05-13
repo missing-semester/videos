@@ -1,4 +1,4 @@
-from lib import Audio, Clip, Fullscreen, Multitrack, Overlay, Playlist
+from msv.lib import Audio, Clip, Fullscreen, Multitrack, Overlay, Playlist
 
 part_1 = "MIT-Missing-Semester-lec-mit-0000-2020jan22-1406-Adhoc Section_{}.mp4"
 audio_1 = Audio(part_1.format(1), delay=5 / 30)

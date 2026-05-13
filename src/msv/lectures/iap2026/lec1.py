@@ -1,9 +1,4 @@
-import os
-import sys
-
-from lib import Audio, Clip, Fullscreen, Multitrack, Overlay
-
-os.chdir(sys.argv[1])
+from msv.lib import Audio, Clip, Fullscreen, Multitrack, Overlay
 
 audio = Audio("Missing-Semester-of-your-CS-Education-on-1_12_2026-(Mon)-Tracking-2026jan12.mp4", delay=0.10)
 tracking = Fullscreen("Missing-Semester-of-your-CS-Education-on-1_12_2026-(Mon)-Tracking-2026jan12.mp4")

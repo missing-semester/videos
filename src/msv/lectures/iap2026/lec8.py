@@ -1,9 +1,4 @@
-import os
-import sys
-
-from lib import Audio, Clip, Crop, Fullscreen, Multitrack
-
-os.chdir(sys.argv[1])
+from msv.lib import Audio, Clip, Crop, Fullscreen, Multitrack
 
 # noise reduction using Audacity,
 # noise source is lecture 8, approx 24:46.75 -- 24:48.00; works better than using lecture 3's noise sample

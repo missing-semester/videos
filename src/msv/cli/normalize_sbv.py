@@ -6,16 +6,20 @@
 import argparse
 import pathlib
 
-parser = argparse.ArgumentParser(description="CLI tool for normalizing sbv caption length")
-parser.add_argument(
-    "-m", "--max", dest="max_length", type=int, default=50, help="Maximum length in characters for line of caption"
-)
-parser.add_argument(
-    "-o", "--output", dest="outfile", type=pathlib.Path, help="Name of the output file. By default -norm is appended"
-)
-parser.add_argument("input_file", type=pathlib.Path, help="Input .sbv captions file")
 
-if __name__ == "__main__":
+def main() -> None:
+    parser = argparse.ArgumentParser(description="CLI tool for normalizing sbv caption length")
+    parser.add_argument(
+        "-m", "--max", dest="max_length", type=int, default=50, help="Maximum length in characters for line of caption"
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        dest="outfile",
+        type=pathlib.Path,
+        help="Name of the output file. By default -norm is appended",
+    )
+    parser.add_argument("input_file", type=pathlib.Path, help="Input .sbv captions file")
     args = parser.parse_args()
     with open(args.input_file) as f:
         lines = f.readlines()
@@ -57,3 +61,7 @@ if __name__ == "__main__":
         outfile = args.input_file.parent / (args.input_file.stem + "-norm.sbv")
     with open(outfile, "w") as f:
         f.writelines(newlines)
+
+
+if __name__ == "__main__":
+    main()

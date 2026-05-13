@@ -1,6 +1,6 @@
 import argparse
 
-from lib import Audio, Clip, Framerate, Fullscreen, Multitrack, Stream, Tile
+from msv.lib import Audio, Clip, Framerate, Fullscreen, Multitrack, Stream, Tile
 
 
 def main() -> None:

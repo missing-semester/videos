@@ -1,39 +1,52 @@
 # Missing Semester: Lecture Videos [![Build Status](https://github.com/missing-semester/videos/actions/workflows/ci.yml/badge.svg)](https://github.com/missing-semester/videos/actions/workflows/ci.yml)
 
-This repository contains scripts for producing lecture videos for [Missing
-Semester](https://missing.csail.mit.edu).
+This repository contains the `msv` package: a small DSL over [ffmpeg-python](https://github.com/kkroening/ffmpeg-python) for producing lecture videos for [Missing Semester](https://missing.csail.mit.edu), along with the per-lecture rendering scripts.
 
-## Dependencies
+## Installation
 
-These scripts rely on [uv](https://docs.astral.sh/uv/).
+The package uses [uv](https://docs.astral.sh/uv/).
 
-## Usage
+For local development, `uv sync` in a clone of this repo will set up the environment.
 
-Run `uv run python {term}_lec{n}.py` to produce a lecture video. The DSL
-defined in `lib.py` is pretty simple; look at any of the processing scripts for
-any lecture video, and it should be clear how to make new ones.
+If you want to use the DSL from outside the package, you can install it directly from GitHub (this package is not published to PyPI):
+
+```bash
+uv add git+https://github.com/missing-semester/videos
+```
+
+## Library
+
+The DSL lives in `msv.lib`. A minimal example:
+
+```python
+from msv.lib import Audio, Clip, Fullscreen, Multitrack
+
+video = Fullscreen("raw.mp4")
+audio = Audio("raw.mp4")
+Multitrack([Clip(video, start="00:30", end="01:00")], audio).render("out.mp4")
+```
+
+See `src/msv/lectures/` for many more examples.
+
+## Console scripts
+
+Installing the package provides the following commands:
+
+- `msv-sync-audio`: Useful for syncing an audio and a video track.
+- `msv-sync-video`:  2x2 tile of synced video streams. Useful for finding audio/video offsets across multi-camera recordings.
+- `msv-normalize-sbv`: split long lines in `.sbv` caption files to YouTube-ish widths.
+- `msv-render-lecture [year] [number] [directory]`: render a specific Missing Semester lecture, e.g. `msv-render-lecture 2026 1 /path/to/raw/footage`.
+
+You can also run these without installing the package with `uv run [command name]`.
 
 ## Development
 
-To type-check the code, run:
-
 ```bash
-uv run mypy .
-```
-
-To run the linter, run:
-
-```bash
-uv run ruff check --fix
-```
-
-To run the formatter, run:
-
-```bash
-uv run ruff format
+uv run mypy .          # type-check
+uv run ruff check      # lint
+uv run ruff format     # format
 ```
 
 ## License
 
-Copyright (c) Anish Athalye, Jose Javier, and Jon Gjengset. Released under the
-MIT License. See [LICENSE.md](LICENSE.md) for details.
+Copyright (c) Anish Athalye, Jose Javier, and Jon Gjengset. Released under the MIT License. See [LICENSE.md](LICENSE.md) for details.

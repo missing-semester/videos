@@ -1,9 +1,4 @@
-import os
-import sys
-
-from lib import Audio, Clip, Fullscreen, Multitrack, Overlay
-
-os.chdir(sys.argv[1])
+from msv.lib import Audio, Clip, Fullscreen, Multitrack, Overlay
 
 # noise reduction using Audacity,
 # noise source is lecture 3 (cleanest sample), approx 51:57.25--51:59.75

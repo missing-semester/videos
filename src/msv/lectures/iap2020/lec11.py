@@ -1,4 +1,4 @@
-from lib import Audio, Clip, Fullscreen, Location, Multitrack, Overlay
+from msv.lib import Audio, Clip, Fullscreen, Location, Multitrack, Overlay
 
 audio = Audio("MIT-Missing-Semester-lec-mit-0000-2020jan30-1405-Adhoc Section_1.mp4", delay=5 / 30)
 screen = Fullscreen("MIT-Missing-Semester-lec-mit-0000-2020jan30-1405-Adhoc Section_2.mp4", delay=5 / 30)

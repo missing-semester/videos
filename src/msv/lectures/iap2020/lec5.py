@@ -1,4 +1,4 @@
-from lib import Audio, Clip, Fullscreen, Multitrack, Overlay
+from msv.lib import Audio, Clip, Fullscreen, Multitrack, Overlay
 
 audio = Audio("MIT-Missing-Semeste-lec-mit-0000-2020jan21-1400-Adhoc Section_1.mp4", delay=6 / 30)
 tracking = Fullscreen("MIT-Missing-Semeste-lec-mit-0000-2020jan21-1400-Adhoc Section_1.mp4", delay=-1 / 30)

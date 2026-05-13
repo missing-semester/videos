@@ -1,9 +1,4 @@
-import os
-import sys
-
-from lib import Audio, Clip, Framerate, Fullscreen, Multitrack, Overlay
-
-os.chdir(sys.argv[1])
+from msv.lib import Audio, Clip, Framerate, Fullscreen, Multitrack, Overlay
 
 # noise reduction using Audacity,
 # noise source is lecture 6, approx 8:03.70 -- 8:04.85; this only has background static

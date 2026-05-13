@@ -1,9 +1,4 @@
-import os
-import sys
-
-from lib import Audio, Clip, Fullscreen, Multitrack, Overlay
-
-os.chdir(sys.argv[1])
+from msv.lib import Audio, Clip, Fullscreen, Multitrack, Overlay
 
 # denoised in the same way as lecture 2
 audio = Audio("denoised.wav", delay=0.10)

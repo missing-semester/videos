@@ -1,6 +1,6 @@
 import argparse
 
-from lib import Audio, Clip, Fullscreen, Multitrack
+from msv.lib import Audio, Clip, Fullscreen, Multitrack
 
 
 def main() -> None:
