@@ -88,6 +88,7 @@ class Location(Enum):
     MIDDLE_RIGHT = auto()
     TOP_CENTER = auto()
     TOP_RIGHT = auto()
+    BOTTOM_RIGHT = auto()
 
 
 class Overlay(Stream):
@@ -141,6 +142,9 @@ class Overlay(Stream):
         elif self.location == Location.TOP_RIGHT:
             overlay_x = 1920 - overlay_margin - overlay_w
             overlay_y = overlay_margin
+        elif self.location == Location.BOTTOM_RIGHT:
+            overlay_x = 1920 - overlay_margin - overlay_w
+            overlay_y = 1080 - overlay_margin - overlay_h
         else:
             raise ValueError(f"bad location: {self.location}")
         overlay = ffmpeg.overlay(main, translucent, x=overlay_x, y=overlay_y)
